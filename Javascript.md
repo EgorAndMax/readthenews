@@ -1,8 +1,6 @@
 --
 ## Библиотеки
 
-[JQuery](http://jquery.com/)<br>
-[JQuery UI](http://jqueryui.com/) ([gem](http://github.com/jquery/jquery-ui))<br>
 [Underscore.js](http://underscorejs.org/)([gem](http://github.com/rweng/underscore-rails))<br>
 [Underscore.string](http://epeli.github.com/underscore.string/) ([gem](https://github.com/jaimie-van-santen/underscore-string-rails))<br>
 [Moment.js](http://momentjs.com/) ([gem](http://github.com/derekprior/momentjs-rails))<br>
