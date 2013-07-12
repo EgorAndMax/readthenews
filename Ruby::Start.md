@@ -1,7 +1,5 @@
-== Установка окружения
-
-* http://www.vagrantup.com/
+## Установка окружения
 * https://rvm.io/
 
-== Ruby
+## Ruby
  * http://nashbridges.me/gem-for-end-user
