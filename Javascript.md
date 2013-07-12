@@ -10,6 +10,7 @@
 
 [Backbone](http://backbonejs.org/) ([gem](http://github.com/codebrew/backbone-rails))<br>
 [Ember.js](http://emberjs.com/) ([gem](https://github.com/emberjs/ember-rails))<br>
+[Angular.js](http://angularjs.org/) ([gem](https://github.com/hiravgandhi/angularjs-rails))<br>
 
 ## Плагины
 
