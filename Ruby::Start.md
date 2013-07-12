@@ -1,5 +1,5 @@
-## Установка окружения
+### Установка окружения
 * https://rvm.io/
 
-## Ruby
+### Ruby
  * http://nashbridges.me/gem-for-end-user
