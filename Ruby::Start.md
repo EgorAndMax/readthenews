@@ -2,4 +2,5 @@
 * https://rvm.io/
 
 ### Ruby
- * http://nashbridges.me/gem-for-end-user
+ * О руби-библиотеках - [Gem глазами потребителя](http://nashbridges.me/gem-for-end-user)
+ * [Ruby koans](http://rubykoans.com/)
