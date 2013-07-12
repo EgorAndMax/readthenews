@@ -23,3 +23,4 @@ http://shichuan.github.com/javascript-patterns/<br>
 http://killdream.github.com/blog/2011/10/understanding-javascript-oop/index.html<br>
 http://addyosmani.github.com/todomvc/<br>
 http://github.com/madrobby/keymaster<br>
+https://github.com/rwldrn/idiomatic.js/tree/master/translations/ru_RU<br>
