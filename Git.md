@@ -1,7 +1,3 @@
-1. [Начало](Начало)
-2. [Комфортная работа](Комфортная работа)
-3. [Понимание](Понимание)
-
 ## Начало
 
 1. [О контроле версий](http://git-scm.com/book/ru/%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-%D0%9E-%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D0%B5-%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D0%B9)
@@ -17,6 +13,6 @@
 
 ## Понимание
 
-[Думай как Git, руководство по Git](http://git.geekjob.ru/epic-mode/)
-[Внутреннее устройство Git](http://www.opennet.ru/base/dev/git_guts.txt.html)
-[ProGit - Книга с ответами на большинство вопросов](http://git-scm.com/book/ru)
+* [Думай как Git, руководство по Git](http://git.geekjob.ru/epic-mode/)
+* [Внутреннее устройство Git](http://www.opennet.ru/base/dev/git_guts.txt.html)
+* [ProGit - Книга с ответами на большинство вопросов](http://git-scm.com/book/ru)
