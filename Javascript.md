@@ -25,3 +25,7 @@ http://killdream.github.com/blog/2011/10/understanding-javascript-oop/index.html
 http://addyosmani.github.com/todomvc/<br>
 http://github.com/madrobby/keymaster<br>
 https://github.com/rwldrn/idiomatic.js/tree/master/translations/ru_RU<br>
+
+## CoffeeScript
+http://coffeescript.org/<br>
+http://coffeescriptcookbook.com/<br>
