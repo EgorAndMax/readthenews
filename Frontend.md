@@ -1,5 +1,5 @@
 ### Rails
-[Assets Pipeline](http://guides.rubyonrails.org/asset_pipeline.html)
+[Assets Pipeline](http://guides.rubyonrails.org/asset_pipeline.html)  
 [Rails ActionView Helpers](http://api.rubyonrails.org/)
 
 ### HTML / HAML
