@@ -2,7 +2,7 @@
 [Sass/Compass/LESS: Tips, Tricks & Best Practices](https://speakerdeck.com/beausmith/less-tips-tricks-best-practices)
 
 ### Видеоканалы
-[Web-standarts days](http://vimeo.com/channels/wstdays)
+[Web-standarts days](http://vimeo.com/channels/wstdays)  
 [404fest](http://404fest.livejournal.com/13881.html)
 
 ### Полезное
