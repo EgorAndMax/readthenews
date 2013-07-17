@@ -1,3 +1,6 @@
+### Rails
+[Assets Pipeline](http://guides.rubyonrails.org/asset_pipeline.html)
+
 ### CSS
 [Sass/Compass/LESS: Tips, Tricks & Best Practices](https://speakerdeck.com/beausmith/less-tips-tricks-best-practices)
 
