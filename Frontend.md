@@ -1,6 +1,7 @@
 ### Rails
 [Assets Pipeline](http://guides.rubyonrails.org/asset_pipeline.html)  
 [Rails ActionView Helpers](http://api.rubyonrails.org/)
+[Simple Form](https://github.com/plataformatec/simple_form)
 
 ### HTML / HAML
 [HAML helpers](http://haml.info/docs/yardoc/Haml/Helpers.html)
