@@ -1,7 +1,10 @@
 ### Rails
 [Assets Pipeline](http://guides.rubyonrails.org/asset_pipeline.html)
 
-### CSS
+### HTML / HAML
+[HAML helpers](http://haml.info/docs/yardoc/Haml/Helpers.html)
+
+### CSS / SASS
 [Sass/Compass/LESS: Tips, Tricks & Best Practices](https://speakerdeck.com/beausmith/less-tips-tricks-best-practices)
 
 ### Видеоканалы
