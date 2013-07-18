@@ -7,11 +7,12 @@
 
 ### Блоги
 1. Блог аджайл коучей http://www.agilecoach.ru/blog/
-2. 
+2. Блог Certified Scrum Practitioner Солнцева Алексея http://scrum.org.ua/
 
 ### Ссылки
 1. Getting real http://blog.web2.com.ua/wp-content/uploads/getting-real.pdf
 2. Сервис профессионального и карьерного роста http://www.stratoplan.ru/
+3. 
 
 ### Конференции
 1. Профессиональная конференция по управлению интернет-проектами http://whalerider.ru/
