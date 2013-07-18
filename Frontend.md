@@ -11,6 +11,7 @@
 
 ### Видеоканалы
 [Web-standarts days](http://vimeo.com/channels/wstdays)  
+[CSS Day Amsterdam](http://vimeo.com/channels/cssday/)
 [404fest](http://404fest.livejournal.com/13881.html)
 
 ### Полезное
