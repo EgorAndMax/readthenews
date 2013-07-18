@@ -8,19 +8,14 @@
 ### Блоги
 1. Блог аджайл коучей http://www.agilecoach.ru/blog/
 2. Блог Certified Scrum Practitioner Солнцева Алексея http://scrum.org.ua/
-3. http://habrahabr.ru/hub/pm/
-4. http://goblingame.blogspot.ru/
+3. Статьи об управлении проектами на habr http://habrahabr.ru/hub/pm/
+4. Блог Test Automation Engineer http://goblingame.blogspot.ru/
 
 ### Ссылки
 1. Getting real http://blog.web2.com.ua/wp-content/uploads/getting-real.pdf
 2. Сервис профессионального и карьерного роста http://www.stratoplan.ru/
-3. http://habrahabr.ru/post/169693/
-4. http://habrahabr.ru/post/171727/
-5. http://gaperton.livejournal.com/58526.html
-6. http://events.yandex.ru/events/planb/spb-feb-2013/talks/506/
-7. http://goblingame.blogspot.ru/2012/10/blog-post_12.html
-7. http://habrahabr.ru/post/168191/
-
+3. http://gaperton.livejournal.com/58526.html
+4. http://events.yandex.ru/events/planb/spb-feb-2013/talks/506/
 
 ### Конференции
 1. Профессиональная конференция по управлению интернет-проектами http://whalerider.ru/
