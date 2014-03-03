@@ -6,4 +6,4 @@
 * [rvm](http://rvm.io/)
 
 #### База
-* [gem глазами потребителя](http://nashbridges.me/gem-for-end-user)
+* [понимание rubygems и bundler](http://nashbridges.me/gem-for-end-user)
