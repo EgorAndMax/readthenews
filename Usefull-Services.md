@@ -1,1 +1,0 @@
-* [airbrake](http://airbrake.io/)
