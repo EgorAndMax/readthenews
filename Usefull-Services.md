@@ -1,1 +1,1 @@
-* (airbrake)[http://airbrake.io/]
+* [airbrake](http://airbrake.io/)
