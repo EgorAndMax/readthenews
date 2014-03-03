@@ -1,1 +1,0 @@
-[Quick Start](https://github.com/mokevnin/coursify/wiki/Quick-Start)
