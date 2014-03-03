@@ -5,6 +5,7 @@
 
 #### Environment
 * [rvm](http://rvm.io/)
+* [sublime](http://www.sublimetext.com/)
 
 #### База
 * [Понимание rubygems и bundler](http://nashbridges.me/gem-for-end-user)
