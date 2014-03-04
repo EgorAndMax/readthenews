@@ -13,6 +13,7 @@
 
 ## Понимание
 
+* [Git. Просто Git.](http://zzet.org/git/learning/undev/coursify/2014/02/09/lection-1-git-course-undev.html)
 * [Думай как Git, руководство по Git](http://git.geekjob.ru/epic-mode/)
 * [Внутреннее устройство Git](http://www.opennet.ru/base/dev/git_guts.txt.html)
 * [ProGit - Книга с ответами на большинство вопросов](http://git-scm.com/book/ru)
