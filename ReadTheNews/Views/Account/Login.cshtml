@@ -1,0 +1,74 @@
+﻿@using ReadTheNews.Models
+@model LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Войти | Read The News</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/stylesInspinia.css" rel="stylesheet" />
+    <link href="~/Content/animate.css" rel="stylesheet" />
+</head>
+
+<body class="login-bg">
+    <div class="login-cover-bg"></div>
+
+    <div id="page-container" class="fade in">
+        <div class="login animated flipInX" data-pageload-addclass="animated flipInX">
+            <div class="login-header">
+                <div class="brand">
+                    Read The News
+                    <small>Актуальные новости в удобном формате</small>
+                </div>
+                <div class="icon"><i class="fa fa-sign-in"></i></div>
+            </div>
+            <div class="login-content">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal margin-bottom-0", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group m-b-20">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg", placeholder = "Email" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group m-b-20">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", placeholder = "Пароль" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="checkbox m-b-20">
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(m => m.RememberMe)
+                    </div>
+                    <div class="login-buttons">
+                        <input type="submit" value="Войти" class="btn btn-success btn-block btn-lg" />
+                    </div>
+                    <div class="new-account">
+                        Все еще нет акаунта? Кликни @Html.ActionLink("здесь", "Register", "Account") для регистрации.
+                    </div>
+                    @* Enable this once you have account confirmation enabled for password reset functionality
+                        <p>
+                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                        </p>*@
+                }
+            </div>
+            @*<div class="col-md-4">
+                    <section id="socialLoginForm">
+                        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                    </section>
+                    </div>
+                </div>
+            *@
+        </div>
+    </div>
+</body>
+
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
