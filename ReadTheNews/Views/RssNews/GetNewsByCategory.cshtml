@@ -1,0 +1,28 @@
+﻿@using ReadTheNews.Models
+@model List<RssItem>
+@{
+    ViewBag.Title = "Категория: " + ViewBag.CategoryName;
+    string active = TempData["active"] != null ? TempData["active"].ToString() : "";
+    switch (active)
+    {
+        case "RssChannels": 
+            ViewBag.RssChannelsActive = "active";
+            break;
+        case "MyRssChannels":
+            ViewBag.MyRssChannelsActive = "active";
+            break;
+        default:
+            ViewBag.RssChannelsActive = "active";
+            break;
+    }
+}
+
+<hr />
+
+@foreach (RssItem item in Model)
+{
+    <div class="gray-bg">
+        @Html.Partial("SingleNews", item)
+    </div>
+}
+<div class="ibox" style="height:0; opacity:0;"></div>

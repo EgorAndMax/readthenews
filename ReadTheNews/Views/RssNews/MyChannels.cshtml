@@ -1,0 +1,38 @@
+﻿@using ReadTheNews.Models
+@model List<ChannelNewsCount>
+
+@{
+    ViewBag.Title = "Мои RSS-каналы";
+    ViewBag.MyRssChannelsActive = "active";
+    TempData["active"] = "MyRssChannels";
+}
+
+<h2>Мои RSS-каналы</h2>
+<hr />
+<ul class="list">
+    @foreach (ChannelNewsCount cnc in Model)
+    {
+        <li><a href="/RssNews/Channel/@cnc.Id" class="list-item">@cnc.Title <span class="badge badge-warning-light">@cnc.Count</span></a></li>
+    }
+</ul>
+
+@section SidebardPanel{
+    @{
+        var list = (List<CountNewsOfCategory>)ViewBag.CountsCategories;
+    }
+    <div class="sidebar-wrapper">
+        <h4 class="sidebar-title">Категории</h4>
+        <div>
+            <ul class="categories">
+                @foreach (CountNewsOfCategory cnoc in list)
+                {
+                    <li>
+                        <a href="/RssNews/GetNewsByCategory/@cnoc.Name">@cnoc.Name</a>
+                        <span class="badge badge-primary pull-right">@cnoc.Count</span>
+                    </li>
+                }
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+}

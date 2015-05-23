@@ -1,0 +1,17 @@
+﻿@using ReadTheNews.Models
+@model List<CountNewsOfCategory>
+
+<h4 class="sidebar-title">Категории</h4>
+<div>
+    <ul class="categories">
+        @foreach (CountNewsOfCategory countNewsOfCategory in Model)
+        {
+            <li>
+                
+                <a href="/RssNews/GetNewsByCategory?name=@countNewsOfCategory.Name">@countNewsOfCategory.Name</a>
+                <span class="badge badge-primary pull-right">@countNewsOfCategory.Count</span>
+            </li>
+        }
+    </ul>
+    <div class="clearfix"></div>
+</div>
