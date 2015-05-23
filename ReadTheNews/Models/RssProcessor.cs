@@ -14,7 +14,7 @@ namespace ReadTheNews.Models
         public bool IsChannelDownload { get; private set; }
 
         private SyndicationFeed _Channel;
-        private RssChannel _CurrentChannel;
+        public RssChannel CurrentChannel { get; private set; }
         private string _RssChannelUrl;
         private RssNewsContext db;
         private bool _IsNewContent;
@@ -44,7 +44,7 @@ namespace ReadTheNews.Models
 
         public RssProcessor(RssChannel channel) : this(channel.Link)
         {
-            _CurrentChannel = channel;
+            CurrentChannel = channel;
         }
 
 
@@ -53,17 +53,17 @@ namespace ReadTheNews.Models
             if (!this.IsChannelDownload)
                 throw new ChannelNotDownloadException();
 
-            if (_CurrentChannel == null)
+            if (CurrentChannel == null)
                 GetRssChannel();
 
             var latestUpdate = new DateTime();
-            if (_CurrentChannel.PubDate != new DateTime())
-                latestUpdate = _CurrentChannel.PubDate;
+            if (CurrentChannel.PubDate != new DateTime())
+                latestUpdate = CurrentChannel.PubDate;
             else
-                latestUpdate = _CurrentChannel.RssItems.First() != null ?
-                    _CurrentChannel.RssItems.First().Date : new DateTime();
+                latestUpdate = CurrentChannel.RssItems.First() != null ?
+                    CurrentChannel.RssItems.First().Date : new DateTime();
 
-            if (_CurrentChannel.PubDate == latestUpdate && _CurrentChannel.RssItems.Count > 0)
+            if (CurrentChannel.PubDate == latestUpdate && CurrentChannel.RssItems.Count > 0)
                 return;
 
             // загрузка списка новостей
@@ -72,9 +72,9 @@ namespace ReadTheNews.Models
 
         private void GetRssItemList()
         {
-            if (_Channel == null || _CurrentChannel == null)
+            if (_Channel == null || CurrentChannel == null)
                 throw new ChannelNotDownloadException();
-            if (!CheckNewContent(_Channel.Items.First()) && _CurrentChannel.RssItems.Count > 0)
+            if (!CheckNewContent(_Channel.Items.First()) && CurrentChannel.RssItems.Count > 0)
                 return;
 
             DateTime yesterday = DateTime.Today.AddDays(-1).Date;
@@ -89,12 +89,12 @@ namespace ReadTheNews.Models
                 GetRssItem(item);
             }
 
-            _CurrentChannel.PubDate = _Channel.LastUpdatedTime.DateTime != new DateTime() ?
+            CurrentChannel.PubDate = _Channel.LastUpdatedTime.DateTime != new DateTime() ?
                 _Channel.LastUpdatedTime.DateTime :
                     _Channel.Items.FirstOrDefault() != null ?
                         _Channel.Items.FirstOrDefault().PublishDate.DateTime : DateTime.Now;
 
-            _DataHelper.UpdateRssChannel(_CurrentChannel);
+            _DataHelper.UpdateRssChannel(CurrentChannel);
 
             _DataHelper.SumbitChanges();
         }
@@ -104,13 +104,13 @@ namespace ReadTheNews.Models
             if (!this.IsChannelDownload)
                 throw new ChannelNotDownloadException();
 
-            _CurrentChannel = Parser.ParseChannel(_Channel, _RssChannelUrl);
-            _DataHelper = new RssDataHelper(_CurrentChannel);
+            CurrentChannel = Parser.ParseChannel(_Channel, _RssChannelUrl);
+            _DataHelper = new RssDataHelper(CurrentChannel);
         }
 
         private RssItem GetRssItem(SyndicationItem item)
         {
-            RssItem newRssItem = Parser.ParseItem(item, _CurrentChannel);
+            RssItem newRssItem = Parser.ParseItem(item, CurrentChannel);
 
             _DataHelper.AddRssItem(newRssItem);
 

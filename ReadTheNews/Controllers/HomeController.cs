@@ -12,16 +12,6 @@ namespace ReadTheNews.Controllers
     {
         public ActionResult Index()
         {
-            var dataHelper = new RssDataHelper(
-                new RssChannel
-                {
-                    Title = "new",
-                    Description = "qw",
-                    ImageSrc = ".jpg",
-                    Link = "url",
-                    PubDate = DateTime.Now
-                });
-
             return View();
         }
 
