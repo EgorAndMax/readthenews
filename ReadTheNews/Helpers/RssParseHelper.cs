@@ -13,7 +13,6 @@ namespace ReadTheNews.Helpers
         static Regex tag = new Regex(@"<[^>]*>");
         static Regex aTag = new Regex(@"<a.+>(.+)</a>");
         static Regex image = new Regex(@".+\.(gif|png|jpg|jpeg)$");
-        static RssDataHelper dataHelper = new RssDataHelper(new RssChannel());
 
         public static RssChannel ParseChannel(SyndicationFeed Channel, string rssChannelUrl)
         {
