@@ -1,0 +1,6 @@
+﻿@using ReadTheNews.Models
+
+<div>
+    @{var list = (List<CountNewsOfCategory>)ViewBag.CountsCategoriesOfChannels; }
+    @Html.Partial("RssCategories", list)
+</div>

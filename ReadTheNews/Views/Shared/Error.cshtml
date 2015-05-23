@@ -1,9 +1,23 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 @{
-    ViewBag.Title = "Error";
+    ViewBag.Title = "Ошибка :(";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h1 class="text-danger">Произошла ошибка.</h1>
+<h2 class="text-danger">Во время вашего последнего запроса возникла необработанная ошибка.</h2>
+<p>@TempData["Error"]</p>
+<div class="row">
+    @if (TempData["Error"] != null && !String.IsNullOrEmpty(TempData["Error"].ToString()))
+    {
+        <img class="trouble-shooting" src="~/Content/Images/this-is-not-the-page-youre-looking-for.png" />
+    }
+    else
+    {
+        <img class="trouble-shooting" src="~/Content/Images/404-killed-kenny.png" />
+    }
+</div>
+@{ 
+    TempData["Error"] = null;
+}
 
