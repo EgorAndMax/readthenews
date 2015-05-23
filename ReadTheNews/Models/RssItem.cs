@@ -47,11 +47,4 @@ namespace ReadTheNews.Models
             RssCategories = new List<RssCategory>();
         }
     }
-
-    [NotMapped]
-    public class DeletedRssItemsByUser
-    {
-        public int RssItemId { get; set; }
-        public string UserId { get; set; }
-    }
 }

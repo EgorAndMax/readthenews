@@ -44,6 +44,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -175,13 +176,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\RssDataHelper.cs" />
+    <Compile Include="Helpers\RssParseHelper.cs" />
+    <Compile Include="Migrations\201505190247441_InitialCreate.cs" />
+    <Compile Include="Migrations\201505190247441_InitialCreate.Designer.cs">
+      <DependentUpon>201505190247441_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DeletedRssNewsByUser.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RssCategory.cs" />
     <Compile Include="Models\RssChannel.cs" />
     <Compile Include="Models\RssItem.cs" />
     <Compile Include="Models\RssNewsContext.cs" />
+    <Compile Include="Models\RssProcessor.cs" />
+    <Compile Include="Models\UserDefferedNews.cs" />
+    <Compile Include="Models\UserFavoriteNews.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -254,6 +266,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201505190247441_InitialCreate.resx">
+      <DependentUpon>201505190247441_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
