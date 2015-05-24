@@ -22,14 +22,12 @@
         <li><a href="/RssNews/Channel/@channel.Id" class="list-item">@channel.Title</a></li>
     }
 </ul>
-@*
-    @section SidebardPanel{
-        @{
-            var list = (List<CountNewsOfCategory>)ViewBag.CountsCategoriesOfChannels;
-        }
-        <div class="sidebar-wrapper">
-            @Html.Partial("RssCategories", list)
-        </div>
+  
+@section SidebardPanel{
+    @{
+        var list = (List<CountNewsOfCategory>)ViewBag.CountsCategories;
     }
-*@
-
+    <div class="sidebar-wrapper">
+        @Html.Partial("RssCategories", list)
+    </div>
+}

@@ -59,7 +59,7 @@ namespace ReadTheNews.Controllers
                 new DeletedRssItemsByUser
                 {
                     RssItemId = rssItemId,
-                    UserId = _userId
+                    UserId = UserId
                 });
             db.SaveChanges();
 
