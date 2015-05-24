@@ -69,7 +69,7 @@ namespace ReadTheNews.Controllers
         public ActionResult Channel(int? id)
         {
             if (id == null)
-                return Redirect("RssNews/Channels");
+                return Redirect("Channels");
 
             int channelId = Int32.Parse(id.ToString());
             RssChannel channel = db.RssChannels.Find(channelId);
@@ -78,15 +78,7 @@ namespace ReadTheNews.Controllers
             {
                 processor = new RssProcessor(channel);
                 processor.GetLatestNews();
-                /*
-                using (var dataHelper = new RssDataHelper())
-                {
-                    var counts = dataHelper.GetCountsCategoriesOfRssChannel(channelId, _userId);
-                    if (counts == null)
-                        throw new Exception("Категории новостей канала не были загружены");
-                    ViewBag.CountsCategoriesOfRssChannel = counts;
-                }
-                */
+
                 ViewBag.IsSubscribe = db.SubscribedChannels.Any(sc => sc.RssChannelId == channelId && sc.UserId == UserId);
             }
             catch (Exception ex)
@@ -94,6 +86,16 @@ namespace ReadTheNews.Controllers
                 TempData["Error"] = ex.Message;
                 return RedirectToAction("Error");
             }
+
+            // TODO: реализовать фильтр по подписанным каналам
+            ViewBag.CountsCategories = (from rc in db.RssCategories.Include("RssItems")
+                                        orderby rc.RssItems.Count() descending
+                                        select new CountNewsOfCategory
+                                        {
+                                            Name = rc.Name,
+                                            Count = rc.RssItems.Count()
+                                        }).Take(20).ToList();
+
             return View(channel);
         }
 
@@ -110,14 +112,16 @@ namespace ReadTheNews.Controllers
                           where sc.UserId == UserId
                           select item
                           ).ToList();
-            /*
-                    ViewBag.CountsCategories = dataHelper.GetCountsCategoriesOfSubscribedRssChannels(_UserId);
-            }
-            catch (Exception ex)
-            {
-                TempData["Error"] = ex.Message;
-                return Redirect("Error");
-            }*/
+
+            // TODO: реализовать фильтр по подписанным каналам
+            ViewBag.CountsCategories = (from rc in db.RssCategories.Include("RssItems")
+                                        orderby rc.RssItems.Count() descending
+                                        select new CountNewsOfCategory
+                                        {
+                                            Name = rc.Name,
+                                            Count = rc.RssItems.Count()
+                                        }).Take(20).ToList();
+
             return View(myNews);
         }
 
@@ -134,6 +138,15 @@ namespace ReadTheNews.Controllers
                                           where n.RssChannelId == c.Id
                                           select n.Id).Count()
                              }).ToList();
+
+            // TODO: реализовать фильтр по подписанным каналам
+            ViewBag.CountsCategories = (from rc in db.RssCategories.Include("RssItems")
+                                        orderby rc.RssItems.Count() descending
+                                        select new CountNewsOfCategory
+                                        {
+                                            Name = rc.Name,
+                                            Count = rc.RssItems.Count()
+                                        }).Take(20).ToList();
 
             return View(myChannels);
         }

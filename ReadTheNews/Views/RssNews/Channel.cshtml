@@ -25,25 +25,24 @@
     </div>
 }
 <div class="ibox" style="height:0; opacity:0;"></div>
-@*
-    @section SidebardPanel{
-        @{
-            var list = (List<CountNewsOfCategory>)ViewBag.CountsCategoriesOfRssChannel;
-        }
-        <div class="sidebar-wrapper">
-            <h4 class="sidebar-title">Категории</h4>
-            <div>
-                <ul class="categories">
-                    @foreach (CountNewsOfCategory countNewsOfCategory in list)
-                    {
-                        <li>
-                            <a href="/RssNews/GetNewsByCategory?name=@countNewsOfCategory.Name">@countNewsOfCategory.Name</a>
-                            <span class="badge badge-primary pull-right">@countNewsOfCategory.Count</span>
-                        </li>
-                    }
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-        </div>
+  
+@section SidebardPanel{
+    @{
+        var list = (List<CountNewsOfCategory>)ViewBag.CountsCategories;
     }
-*@
+    <div class="sidebar-wrapper">
+        <h4 class="sidebar-title">Категории</h4>
+        <div>
+            <ul class="categories">
+                @foreach (CountNewsOfCategory countNewsOfCategory in list)
+                {
+                    <li>
+                        <a href="/RssNews/GetNewsByCategory?name=@countNewsOfCategory.Name">@countNewsOfCategory.Name</a>
+                        <span class="badge badge-primary pull-right">@countNewsOfCategory.Count</span>
+                    </li>
+                }
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+}
