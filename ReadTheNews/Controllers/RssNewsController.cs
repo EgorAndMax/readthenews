@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using ReadTheNews.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -149,6 +150,44 @@ namespace ReadTheNews.Controllers
                                         }).Take(20).ToList();
 
             return View(myChannels);
+        }
+
+        public ActionResult GetNewsByCategory(string name)
+        {
+            if (String.IsNullOrEmpty(name))
+                return View(new List<RssCategory>());
+
+            var category = (from rc in db.RssCategories.Include("RssItems")
+                        where rc.Name == name
+                        select rc).FirstOrDefault();
+
+            if (category == null)
+                return View(new List<RssCategory>());
+            
+            ViewBag.CategoryName = name;
+            var news = category.RssItems.ToList();
+
+            return View(news);
+        }
+
+        public ActionResult MyFavoriteNews()
+        {
+            var favoriteNews = (from fn in db.FavoriteNews
+                               where fn.UserId == UserId
+                               join ri in db.RssItems on fn.RssItemId equals ri.Id
+                               select ri).ToList();
+
+            return View(favoriteNews);
+        }
+
+        public ActionResult ReadItLater()
+        {
+            var readingList = (from dn in db.DefferedNews
+                                where dn.UserId == UserId
+                                join ri in db.RssItems on dn.RssItemId equals ri.Id
+                                select ri).ToList();
+
+            return View(readingList);
         }
     }
 }
