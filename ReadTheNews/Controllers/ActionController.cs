@@ -31,5 +31,56 @@ namespace ReadTheNews.Controllers
 
             return new EmptyResult();
         }
+
+        public EmptyResult AddNewFavoriteRssNews(int? id)
+        {
+            if (id == null)
+                return new EmptyResult();
+
+            int rssItemId = Int32.Parse(id.ToString());
+            db.FavoriteNews.Add(
+                new UserFavoriteNews
+                {
+                    RssItemId = rssItemId,
+                    UserId = UserId
+                });
+            db.SaveChanges();
+
+            return new EmptyResult();
+        }
+
+        public EmptyResult DeleteNewsFromUserNewsList(int? id)
+        {
+            if (id == null)
+                return new EmptyResult();
+
+            int rssItemId = Int32.Parse(id.ToString());
+            db.DeletedNews.Add(
+                new DeletedRssItemsByUser
+                {
+                    RssItemId = rssItemId,
+                    UserId = _userId
+                });
+            db.SaveChanges();
+
+            return new EmptyResult();
+        }
+
+        public EmptyResult ReadLaterThisNews(int? id)
+        {
+            if (id == null)
+                return new EmptyResult();
+
+            int rssItemId = Int32.Parse(id.ToString());
+            db.DefferedNews.Add(
+                new UserDefferedNews
+                {
+                    RssItemId = rssItemId,
+                    UserId = UserId
+                });
+            db.SaveChanges();
+
+            return new EmptyResult();
+        }
     }
 }
