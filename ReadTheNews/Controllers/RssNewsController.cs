@@ -31,15 +31,18 @@ namespace ReadTheNews.Controllers
         [AllowAnonymous]
         public ActionResult Channels()
         {
-            try
-            {
-                ViewBag.RssChannels = db.RssChannels.ToList();
-            }
-            catch (Exception ex)
-            {
-                TempData["Error"] = ex.Message;
-                return RedirectToRoute(new { controller = "RssNews", action = "Error" });
-            }
+            ViewBag.RssChannels = db.RssChannels.ToList();
+
+            ViewBag.CountsCategories = (from rc in db.RssCategories.Include("RssItems")
+                                        select new CountNewsOfCategory
+                                        {
+                                            Name = rc.Name,
+                                            Count = rc.RssItems.Except(from d in db.DeletedNews
+                                                                       where d.UserId == UserId
+                                                                       join ri in db.RssItems on d.RssItemId equals ri.Id
+                                                                       select ri).Count()
+                                        }).OrderByDescending(cnc => cnc.Count).Take(20).ToList();
+
             return View();
         }
 
@@ -90,12 +93,14 @@ namespace ReadTheNews.Controllers
 
             // TODO: реализовать фильтр по подписанным каналам
             ViewBag.CountsCategories = (from rc in db.RssCategories.Include("RssItems")
-                                        orderby rc.RssItems.Count() descending
                                         select new CountNewsOfCategory
                                         {
                                             Name = rc.Name,
-                                            Count = rc.RssItems.Count()
-                                        }).Take(20).ToList();
+                                            Count = rc.RssItems.Except(from d in db.DeletedNews
+                                                                       where d.UserId == UserId
+                                                                       join ri in db.RssItems on d.RssItemId equals ri.Id
+                                                                       select ri).Count()
+                                        }).OrderBy(cnc => cnc.Count).Take(20).ToList();
 
             return View(channel);
         }
@@ -112,16 +117,24 @@ namespace ReadTheNews.Controllers
                           join sc in db.SubscribedChannels on channel.Id equals sc.RssChannelId
                           where sc.UserId == UserId
                           select item
-                          ).ToList();
+                          ).Except(from item in db.RssItems
+                                   join channel in db.RssChannels on item.RssChannelId equals channel.Id
+                                   join sc in db.SubscribedChannels on channel.Id equals sc.RssChannelId
+                                   where sc.UserId == UserId
+                                   join d in db.DeletedNews on item.Id equals d.RssItemId
+                                   where d.UserId == UserId
+                                   select item).ToList();
 
             // TODO: реализовать фильтр по подписанным каналам
             ViewBag.CountsCategories = (from rc in db.RssCategories.Include("RssItems")
-                                        orderby rc.RssItems.Count() descending
                                         select new CountNewsOfCategory
                                         {
                                             Name = rc.Name,
-                                            Count = rc.RssItems.Count()
-                                        }).Take(20).ToList();
+                                            Count = rc.RssItems.Except(from d in db.DeletedNews
+                                                                       where d.UserId == UserId
+                                                                       join ri in db.RssItems on d.RssItemId equals ri.Id
+                                                                       select ri).Count()
+                                        }).OrderBy(cnc => cnc.Count).Take(20).ToList();
 
             return View(myNews);
         }
@@ -129,16 +142,16 @@ namespace ReadTheNews.Controllers
         public ActionResult MyChannels()
         {
             var myChannels = (from c in db.RssChannels
-                             join sc in db.SubscribedChannels on c.Id equals sc.RssChannelId
-                             where sc.UserId == UserId
-                             select new ChannelNewsCount
-                             {
-                                 Id = c.Id,
-                                 Title = c.Title,
-                                 Count = (from n in db.RssItems
-                                          where n.RssChannelId == c.Id
-                                          select n.Id).Count()
-                             }).ToList();
+                              join sc in db.SubscribedChannels on c.Id equals sc.RssChannelId
+                              where sc.UserId == UserId
+                              select new ChannelNewsCount
+                              {
+                                  Id = c.Id,
+                                  Title = c.Title,
+                                  Count = (from n in db.RssItems
+                                           where n.RssChannelId == c.Id
+                                           select n.Id).Count()
+                              }).ToList();
 
             // TODO: реализовать фильтр по подписанным каналам
             ViewBag.CountsCategories = (from rc in db.RssCategories.Include("RssItems")
@@ -158,14 +171,17 @@ namespace ReadTheNews.Controllers
                 return View(new List<RssCategory>());
 
             var category = (from rc in db.RssCategories.Include("RssItems")
-                        where rc.Name == name
-                        select rc).FirstOrDefault();
+                            where rc.Name == name
+                            select rc).FirstOrDefault();
 
             if (category == null)
                 return View(new List<RssCategory>());
-            
+
             ViewBag.CategoryName = name;
-            var news = category.RssItems.ToList();
+            var news = category.RssItems.Except(from d in db.DeletedNews
+                                                where d.UserId == UserId
+                                                join ri in db.RssItems on d.RssItemId equals ri.Id
+                                                select ri).ToList();
 
             return View(news);
         }
@@ -173,9 +189,12 @@ namespace ReadTheNews.Controllers
         public ActionResult MyFavoriteNews()
         {
             var favoriteNews = (from fn in db.FavoriteNews
-                               where fn.UserId == UserId
-                               join ri in db.RssItems on fn.RssItemId equals ri.Id
-                               select ri).ToList();
+                                where fn.UserId == UserId
+                                join ri in db.RssItems on fn.RssItemId equals ri.Id
+                                select ri).Except(from d in db.DeletedNews
+                                                  where d.UserId == UserId
+                                                  join ri in db.RssItems on d.RssItemId equals ri.Id
+                                                  select ri).ToList();
 
             return View(favoriteNews);
         }
@@ -183,9 +202,12 @@ namespace ReadTheNews.Controllers
         public ActionResult ReadItLater()
         {
             var readingList = (from dn in db.DefferedNews
-                                where dn.UserId == UserId
-                                join ri in db.RssItems on dn.RssItemId equals ri.Id
-                                select ri).ToList();
+                               where dn.UserId == UserId
+                               join ri in db.RssItems on dn.RssItemId equals ri.Id
+                               select ri).Except(from d in db.DeletedNews
+                                                 where d.UserId == UserId
+                                                 join ri in db.RssItems on d.RssItemId equals ri.Id
+                                                 select ri).ToList();
 
             return View(readingList);
         }
