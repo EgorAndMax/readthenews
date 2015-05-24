@@ -40,6 +40,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EFlogger.EntityFramework6, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EFlogger-For6.0.3.3\lib\EFlogger.EntityFramework6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -171,6 +175,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RssNewsController.cs" />
@@ -193,6 +198,7 @@
     <Compile Include="Models\RssItem.cs" />
     <Compile Include="Models\RssNewsContext.cs" />
     <Compile Include="Models\RssProcessor.cs" />
+    <Compile Include="Models\UserSubscribedChannels.cs" />
     <Compile Include="Models\UserDefferedNews.cs" />
     <Compile Include="Models\UserFavoriteNews.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

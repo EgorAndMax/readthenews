@@ -8,7 +8,7 @@ using System.Web;
 
 namespace ReadTheNews.Helpers
 {
-    public class RssDataHelper
+    public class RssDataHelper : IDisposable
     {
         private RssChannel _Channel;
         private List<RssItem> _Items;
@@ -76,6 +76,11 @@ namespace ReadTheNews.Helpers
 
             db.RssItems.RemoveRange(deletedNews);
             db.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
         }
     }
 }
