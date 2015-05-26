@@ -15,6 +15,7 @@ namespace ReadTheNews.Models
         public DbSet<DeletedRssItemsByUser> DeletedNews { get; set; }
         public DbSet<UserDefferedNews> DefferedNews { get; set; }
         public DbSet<UserSubscribedChannels> SubscribedChannels { get; set; }
+        public DbSet<RssItemRssCategories> RssItemRssCategories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -22,6 +23,15 @@ namespace ReadTheNews.Models
             modelBuilder.Entity<UserDefferedNews>().HasKey(d => new { d.RssItemId, d.UserId });
             modelBuilder.Entity<DeletedRssItemsByUser>().HasKey(d => new { d.RssItemId, d.UserId });
             modelBuilder.Entity<UserSubscribedChannels>().HasKey(s => new { s.RssChannelId, s.UserId });
+            modelBuilder.Entity<RssItemRssCategories>().HasKey(rirc => new { rirc.RssCategoryId, rirc.RssItemId });
+            modelBuilder.Entity<RssItemRssCategories>().HasRequired(rirc => rirc.RssItem)
+                .WithMany(ri => ri.RssItemRssCategories)
+                .HasForeignKey(rirc => rirc.RssItemId)
+                .WillCascadeOnDelete();
+            modelBuilder.Entity<RssItemRssCategories>().HasRequired(rirc => rirc.RssCategory)
+                .WithMany(r => r.RssItemRssCategories)
+                .HasForeignKey(rirc => rirc.RssCategoryId)
+                .WillCascadeOnDelete();
 
             base.OnModelCreating(modelBuilder);
         }
