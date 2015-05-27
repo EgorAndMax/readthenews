@@ -2,13 +2,14 @@
 
 namespace ReadTheNews.Models
 {
-    public class DeletedRssItemsByUser
+    public class RssItemRssCategories
     {
         [Required]
         public int RssItemId { get; set; }
         public virtual RssItem RssItem { get; set; }
 
         [Required]
-        public string UserId { get; set; }
+        public int RssCategoryId { get; set; }
+        public virtual RssCategory RssCategory { get; set; }
     }
 }

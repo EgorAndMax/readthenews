@@ -191,10 +191,9 @@ namespace ReadTheNews.Controllers
             var favoriteNews = (from fn in db.FavoriteNews
                                 where fn.UserId == UserId
                                 join ri in db.RssItems on fn.RssItemId equals ri.Id
-                                select ri).Except(from d in db.DeletedNews
-                                                  where d.UserId == UserId
-                                                  join ri in db.RssItems on d.RssItemId equals ri.Id
-                                                  select ri).ToList();
+                                select ri).ToList();
+            if (favoriteNews == null)
+                favoriteNews = new List<RssItem>();
 
             return View(favoriteNews);
         }

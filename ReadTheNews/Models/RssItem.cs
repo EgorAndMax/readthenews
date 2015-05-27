@@ -41,10 +41,13 @@ namespace ReadTheNews.Models
         public virtual RssChannel RssChannel { get; set; }
 
         public virtual ICollection<RssCategory> RssCategories { get; set; }
+        public virtual ICollection<RssItemRssCategories> RssItemRssCategories { get; set; }
+        public virtual ICollection<DeletedRssItemsByUser> DeletedNews { get; set; }
 
         public RssItem()
         {
             RssCategories = new List<RssCategory>();
+            RssItemRssCategories = new List<RssItemRssCategories>();
         }
     }
 }

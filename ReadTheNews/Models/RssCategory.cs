@@ -15,10 +15,12 @@ namespace ReadTheNews.Models
         public string Name { get; set; }
 
         public virtual ICollection<RssItem> RssItems { get; set; }
+        public virtual ICollection<RssItemRssCategories> RssItemRssCategories { get; set; }
 
         public RssCategory()
         {
             RssItems = new List<RssItem>();
+            RssItemRssCategories = new List<RssItemRssCategories>();
         }
     }
 

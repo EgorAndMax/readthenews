@@ -196,6 +196,7 @@
     <Compile Include="Models\RssCategory.cs" />
     <Compile Include="Models\RssChannel.cs" />
     <Compile Include="Models\RssItem.cs" />
+    <Compile Include="Models\RssItemRssCategories.cs" />
     <Compile Include="Models\RssNewsContext.cs" />
     <Compile Include="Models\RssProcessor.cs" />
     <Compile Include="Models\UserSubscribedChannels.cs" />
@@ -245,6 +246,7 @@
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Icon.png" />
+    <Content Include="Scripts\Action.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\inspinia.js" />
@@ -260,6 +262,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\ReadTheNews.js" />
+    <Content Include="Scripts\Recognizion.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
