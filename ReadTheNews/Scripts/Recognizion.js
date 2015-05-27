@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 ﻿
+=======
+﻿//<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/1.6.0/annyang.min.js"></script>
+
+>>>>>>> 234fad4face7083c077a38efa6d1cae117200109
 if (annyang) {
     annyang.setLanguage('ru');
 
 
+<<<<<<< HEAD
     var commands = {
         'категория :name': function(name)
         {
@@ -31,4 +37,15 @@ if (annyang) {
     annyang.addCommands(commands);
     annyang.start();
 
+=======
+
+    var commands = {
+        'привет': say
+    };
+
+
+
+    annyang.addCommands(commands);
+    annyang.start();
+>>>>>>> 234fad4face7083c077a38efa6d1cae117200109
 }

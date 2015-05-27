@@ -22,6 +22,15 @@ namespace ReadTheNews.Models
             modelBuilder.Entity<UserFavoriteNews>().HasKey(t => new { t.RssItemId, t.UserId });
             modelBuilder.Entity<UserDefferedNews>().HasKey(d => new { d.RssItemId, d.UserId });
             modelBuilder.Entity<UserSubscribedChannels>().HasKey(s => new { s.RssChannelId, s.UserId });
+            modelBuilder.Entity<RssItemRssCategories>().HasKey(rirc => new { rirc.RssCategoryId, rirc.RssItemId });
+            modelBuilder.Entity<RssItemRssCategories>().HasRequired(rirc => rirc.RssItem)
+                .WithMany(ri => ri.RssItemRssCategories)
+                .HasForeignKey(rirc => rirc.RssItemId)
+                .WillCascadeOnDelete();
+            modelBuilder.Entity<RssItemRssCategories>().HasRequired(rirc => rirc.RssCategory)
+                .WithMany(r => r.RssItemRssCategories)
+                .HasForeignKey(rirc => rirc.RssCategoryId)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<DeletedRssItemsByUser>().HasKey(d => new { d.RssItemId, d.UserId });
             modelBuilder.Entity<DeletedRssItemsByUser>().HasRequired(d => d.RssItem)

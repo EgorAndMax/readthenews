@@ -31,7 +31,9 @@ namespace ReadTheNews.Models
         {
             try
             {
-                var feedReader = XmlReader.Create(url);
+                var settings = new XmlReaderSettings();
+                settings.DtdProcessing = DtdProcessing.Parse;
+                var feedReader = XmlReader.Create(url, settings);
                 _Channel = SyndicationFeed.Load(feedReader);
                 IsChannelDownload = true;
                 _RssChannelUrl = url;

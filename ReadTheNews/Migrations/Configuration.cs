@@ -1,11 +1,9 @@
 namespace ReadTheNews.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
+    using ReadTheNews.Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ReadTheNews.Models.RssNewsContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<RssNewsContext>
     {
         public Configuration()
         {
@@ -13,7 +11,7 @@ namespace ReadTheNews.Migrations
             ContextKey = "ReadTheNews.Models.RssNewsContext";
         }
 
-        protected override void Seed(ReadTheNews.Models.RssNewsContext context)
+        protected override void Seed(RssNewsContext context)
         {
             //  This method will be called after migrating to the latest version.
 

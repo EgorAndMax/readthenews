@@ -17,4 +17,10 @@
 
     speechSynthesis.speak(msg);
     */
+<<<<<<< HEAD
+=======
+    console.log("я распознал");
+    location.replace("http://localhost:9710/RssNews/MyNews");
+    alert("Привет!");
+>>>>>>> 234fad4face7083c077a38efa6d1cae117200109
 }
