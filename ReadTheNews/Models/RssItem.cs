@@ -42,15 +42,15 @@ namespace ReadTheNews.Models
 
         public virtual ICollection<RssCategory> RssCategories { get; set; }
         public virtual ICollection<RssItemRssCategories> RssItemRssCategories { get; set; }
-<<<<<<< HEAD
         public virtual ICollection<DeletedRssItemsByUser> DeletedNews { get; set; }
-=======
->>>>>>> 234fad4face7083c077a38efa6d1cae117200109
+        public virtual ICollection<UserFavoriteNews> FavoriteNews { get; set; }
 
         public RssItem()
         {
             RssCategories = new List<RssCategory>();
             RssItemRssCategories = new List<RssItemRssCategories>();
+            DeletedNews = new List<DeletedRssItemsByUser>();
+            FavoriteNews = new List<UserFavoriteNews>();
         }
     }
 }

@@ -19,31 +19,47 @@ namespace ReadTheNews.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserFavoriteNews>().HasKey(t => new { t.RssItemId, t.UserId });
-            modelBuilder.Entity<UserDefferedNews>().HasKey(d => new { d.RssItemId, d.UserId });
-            modelBuilder.Entity<UserSubscribedChannels>().HasKey(s => new { s.RssChannelId, s.UserId });
-            modelBuilder.Entity<RssItemRssCategories>().HasKey(rirc => new { rirc.RssCategoryId, rirc.RssItemId });
-            modelBuilder.Entity<RssItemRssCategories>().HasRequired(rirc => rirc.RssItem)
+            modelBuilder.Entity<UserFavoriteNews>().HasKey(t => new { t.RssItemId, t.UserId })
+                .HasRequired(f => f.RssItem)
+                .WithMany(ri => ri.FavoriteNews)
+                .HasForeignKey(f => f.RssItemId)
+                .WillCascadeOnDelete();
+
+            modelBuilder.Entity<UserDefferedNews>()
+                .HasKey(d => new { d.RssItemId, d.UserId });
+
+            modelBuilder.Entity<UserSubscribedChannels>()
+                .HasKey(s => new { s.RssChannelId, s.UserId });
+
+            modelBuilder.Entity<RssItemRssCategories>()
+                .HasKey(rirc => new { rirc.RssCategoryId, rirc.RssItemId })
+                .HasRequired(rirc => rirc.RssItem)
                 .WithMany(ri => ri.RssItemRssCategories)
                 .HasForeignKey(rirc => rirc.RssItemId)
                 .WillCascadeOnDelete();
-            modelBuilder.Entity<RssItemRssCategories>().HasRequired(rirc => rirc.RssCategory)
+
+            modelBuilder.Entity<RssItemRssCategories>()
+                .HasRequired(rirc => rirc.RssCategory)
                 .WithMany(r => r.RssItemRssCategories)
                 .HasForeignKey(rirc => rirc.RssCategoryId)
                 .WillCascadeOnDelete();
 
-            modelBuilder.Entity<DeletedRssItemsByUser>().HasKey(d => new { d.RssItemId, d.UserId });
-            modelBuilder.Entity<DeletedRssItemsByUser>().HasRequired(d => d.RssItem)
+            modelBuilder.Entity<DeletedRssItemsByUser>()
+                .HasKey(d => new { d.RssItemId, d.UserId })
+                .HasRequired(d => d.RssItem)
                 .WithMany(ri => ri.DeletedNews)
                 .HasForeignKey(d => d.RssItemId)
                 .WillCascadeOnDelete();
 
-            modelBuilder.Entity<RssItemRssCategories>().HasKey(rirc => new { rirc.RssItemId, rirc.RssCategoryId });
-            modelBuilder.Entity<RssItemRssCategories>().HasRequired(rirc => rirc.RssItem)
+            modelBuilder.Entity<RssItemRssCategories>()
+                .HasKey(rirc => new { rirc.RssItemId, rirc.RssCategoryId })
+                .HasRequired(rirc => rirc.RssItem)
                 .WithMany(ri => ri.RssItemRssCategories)
                 .HasForeignKey(rirc => rirc.RssItemId)
                 .WillCascadeOnDelete();
-            modelBuilder.Entity<RssItemRssCategories>().HasRequired(rirc => rirc.RssCategory)
+
+            modelBuilder.Entity<RssItemRssCategories>()
+                .HasRequired(rirc => rirc.RssCategory)
                 .WithMany(rc => rc.RssItemRssCategories)
                 .HasForeignKey(rirc => rirc.RssCategoryId)
                 .WillCascadeOnDelete();
