@@ -48,6 +48,17 @@ namespace ReadTheNews.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.UserFavoriteNews",
+                c => new
+                    {
+                        RssItemId = c.Int(nullable: false),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.RssItemId, t.UserId })
+                .ForeignKey("dbo.RssItems", t => t.RssItemId, cascadeDelete: true)
+                .Index(t => t.RssItemId);
+            
+            CreateTable(
                 "dbo.RssItemRssCategories",
                 c => new
                     {
@@ -64,13 +75,16 @@ namespace ReadTheNews.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.UserFavoriteNews", "RssItemId", "dbo.RssItems");
             DropForeignKey("dbo.RssItems", "RssChannelId", "dbo.RssChannels");
             DropForeignKey("dbo.RssItemRssCategories", "RssCategory_Id", "dbo.RssCategories");
             DropForeignKey("dbo.RssItemRssCategories", "RssItem_Id", "dbo.RssItems");
             DropIndex("dbo.RssItemRssCategories", new[] { "RssCategory_Id" });
             DropIndex("dbo.RssItemRssCategories", new[] { "RssItem_Id" });
+            DropIndex("dbo.UserFavoriteNews", new[] { "RssItemId" });
             DropIndex("dbo.RssItems", new[] { "RssChannelId" });
             DropTable("dbo.RssItemRssCategories");
+            DropTable("dbo.UserFavoriteNews");
             DropTable("dbo.RssChannels");
             DropTable("dbo.RssItems");
             DropTable("dbo.RssCategories");

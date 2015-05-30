@@ -5,7 +5,7 @@ namespace ReadTheNews.Models
     public class RssNewsContext : DbContext
     {
         public RssNewsContext()
-            : base("DefaultConnection")
+            : base("RssContext")
         { }
 
         public DbSet<RssCategory> RssCategories { get; set; }
