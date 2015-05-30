@@ -7,7 +7,6 @@
         @foreach (CountNewsOfCategory countNewsOfCategory in Model)
         {
             <li>
-                
                 <a href="/RssNews/GetNewsByCategory?name=@countNewsOfCategory.Name">@countNewsOfCategory.Name</a>
                 <span class="badge badge-primary pull-right">@countNewsOfCategory.Count</span>
             </li>

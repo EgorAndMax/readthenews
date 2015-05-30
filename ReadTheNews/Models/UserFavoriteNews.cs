@@ -2,7 +2,7 @@
 
 namespace ReadTheNews.Models
 {
-    public class UserFavoriteNews
+    public class FavoriteNews
     {
         [Required]
         public int RssItemId { get; set; }

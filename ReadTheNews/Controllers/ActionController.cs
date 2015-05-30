@@ -39,7 +39,7 @@ namespace ReadTheNews.Controllers
 
             int rssItemId = Int32.Parse(id.ToString());
             db.FavoriteNews.Add(
-                new UserFavoriteNews
+                new FavoriteNews
                 {
                     RssItemId = rssItemId,
                     UserId = UserId
