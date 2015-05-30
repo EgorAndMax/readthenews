@@ -70,6 +70,16 @@ namespace ReadTheNews.Controllers
             channel.RssItems.ToArray();
             ViewBag.IsSubscribe = db.SubscribedChannels.Any(sc => sc.RssChannelId == channel.Id && sc.UserId == UserId);
 
+            ViewBag.CountsCategories = (from rc in db.RssCategories.Include("RssItems")
+                                        select new CountNewsOfCategory
+                                        {
+                                            Name = rc.Name,
+                                            Count = rc.RssItems.Except(from d in db.DeletedNews
+                                                                       where d.UserId == UserId
+                                                                       join ri in db.RssItems on d.RssItemId equals ri.Id
+                                                                       select ri).Count()
+                                        }).OrderBy(cnc => cnc.Count).Take(20).ToList();
+
             return View(@"Channel", channel);
         }
 
