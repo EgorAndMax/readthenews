@@ -1,6 +1,0 @@
-* [ruby coans](https://github.com/neo/ruby_koans)
-* [exercism](http://exercism.io/)
-* [codebattle](http://wddx.ru/)
-* [codeacademy](http://www.codecademy.com/)
-* [codeschool](https://www.codeschool.com/)
-* [talentbuddy](http://www.talentbuddy.co/)
