@@ -1,10 +1,8 @@
 ﻿using ReadTheNews.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 
 namespace ReadTheNews.Helpers
 {
@@ -20,8 +18,11 @@ namespace ReadTheNews.Helpers
             db = new RssNewsContext();
 
             _Channel = channel;
-            db.RssChannels.Add(channel);
-            db.SaveChanges();
+            if (!db.RssChannels.Any(rc => rc.Title == _Channel.Title))
+            {
+                db.RssChannels.Add(channel);
+                db.SaveChanges();
+            }
 
             _Items = new List<RssItem>();
             _Categories = new List<RssCategory>();

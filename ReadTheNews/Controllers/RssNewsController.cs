@@ -31,19 +31,8 @@ namespace ReadTheNews.Controllers
         [AllowAnonymous]
         public ActionResult Channels()
         {
-            
             ViewBag.RssChannels = db.RssChannels.ToList();
-
-            ViewBag.CountsCategories = (from rc in db.RssCategories.Include("RssItems")
-                                        let deletedNews = (from d in db.DeletedNews
-                                                           where d.UserId == UserId
-                                                           join ri in db.RssItems on d.RssItemId equals ri.Id
-                                                           select ri)
-                                        select new CountNewsOfCategory
-                                        {
-                                            Name = rc.Name,
-                                            Count = rc.RssItems.Except(deletedNews).Count()
-                                        }).OrderByDescending(cnc => cnc.Count).Take(20).ToList();
+            ViewBag.CountsCategories = GetCountsCategories();
 
             return View();
         }
@@ -66,21 +55,7 @@ namespace ReadTheNews.Controllers
                 return Redirect("Error");
             }
 
-            var channel = processor.CurrentChannel;
-            channel.RssItems.ToArray();
-            ViewBag.IsSubscribe = db.SubscribedChannels.Any(sc => sc.RssChannelId == channel.Id && sc.UserId == UserId);
-
-            ViewBag.CountsCategories = (from rc in db.RssCategories.Include("RssItems")
-                                        select new CountNewsOfCategory
-                                        {
-                                            Name = rc.Name,
-                                            Count = rc.RssItems.Except(from d in db.DeletedNews
-                                                                       where d.UserId == UserId
-                                                                       join ri in db.RssItems on d.RssItemId equals ri.Id
-                                                                       select ri).Count()
-                                        }).OrderBy(cnc => cnc.Count).Take(20).ToList();
-
-            return View(@"Channel", channel);
+            return Redirect(@"Channel/" + processor.CurrentChannel.Id);
         }
 
         public ActionResult Channel(int? id)
@@ -89,7 +64,7 @@ namespace ReadTheNews.Controllers
                 return Redirect("Channels");
 
             int channelId = Int32.Parse(id.ToString());
-            RssChannel channel = db.RssChannels.Find(channelId);
+            var channel = db.RssChannels.Find(channelId);
             RssProcessor processor;
             try
             {
@@ -105,15 +80,7 @@ namespace ReadTheNews.Controllers
             }
 
             // TODO: реализовать фильтр по подписанным каналам
-            ViewBag.CountsCategories = (from rc in db.RssCategories.Include("RssItems")
-                                        select new CountNewsOfCategory
-                                        {
-                                            Name = rc.Name,
-                                            Count = rc.RssItems.Except(from d in db.DeletedNews
-                                                                       where d.UserId == UserId
-                                                                       join ri in db.RssItems on d.RssItemId equals ri.Id
-                                                                       select ri).Count()
-                                        }).OrderBy(cnc => cnc.Count).Take(20).ToList();
+            ViewBag.CountsCategories = GetCountsCategories();
 
             return View(channel);
         }
@@ -139,15 +106,7 @@ namespace ReadTheNews.Controllers
                                    select item).ToList();
 
             // TODO: реализовать фильтр по подписанным каналам
-            ViewBag.CountsCategories = (from rc in db.RssCategories.Include("RssItems")
-                                        select new CountNewsOfCategory
-                                        {
-                                            Name = rc.Name,
-                                            Count = rc.RssItems.Except(from d in db.DeletedNews
-                                                                       where d.UserId == UserId
-                                                                       join ri in db.RssItems on d.RssItemId equals ri.Id
-                                                                       select ri).Count()
-                                        }).OrderByDescending(cnc => cnc.Count).Take(20).ToList();
+            ViewBag.CountsCategories = GetCountsCategories();
 
             return View(myNews);
         }
@@ -167,13 +126,7 @@ namespace ReadTheNews.Controllers
                               }).ToList();
 
             // TODO: реализовать фильтр по подписанным каналам
-            ViewBag.CountsCategories = (from rc in db.RssCategories.Include("RssItems")
-                                        orderby rc.RssItems.Count() descending
-                                        select new CountNewsOfCategory
-                                        {
-                                            Name = rc.Name,
-                                            Count = rc.RssItems.Count()
-                                        }).Take(20).ToList();
+            ViewBag.CountsCategories = GetCountsCategories();
 
             return View(myChannels);
         }
@@ -195,6 +148,8 @@ namespace ReadTheNews.Controllers
                                                 where d.UserId == UserId
                                                 join ri in db.RssItems on d.RssItemId equals ri.Id
                                                 select ri).ToList();
+            var temp = GetCountsCategories();
+            ViewBag.CountsCategories = temp;
 
             return View(news);
         }
@@ -209,6 +164,8 @@ namespace ReadTheNews.Controllers
                                                   join ri in db.RssItems on d.RssItemId equals ri.Id
                                                   select ri).ToList();
 
+            ViewBag.CountsCategories = GetCountsCategories();
+
             return View(favoriteNews);
         }
 
@@ -222,7 +179,24 @@ namespace ReadTheNews.Controllers
                                                  join ri in db.RssItems on d.RssItemId equals ri.Id
                                                  select ri).ToList();
 
+            ViewBag.CountsCategories = GetCountsCategories();
+
             return View(readingList);
         }
+
+        private List<CountNewsOfCategory> GetCountsCategories() =>
+            (from rc in db.RssCategories.Include("RssItems")
+             let userId = UserId
+             let deletedNews = (from d in db.DeletedNews
+                                where d.UserId == userId
+                                join ri in db.RssItems on d.RssItemId equals ri.Id
+                                join fn in db.FavoriteNews on ri.Id equals fn.RssItemId
+                                join defn in db.DefferedNews on ri.Id equals defn.RssItemId
+                                select ri)
+             select new CountNewsOfCategory
+             {
+                 Name = rc.Name,
+                 Count = rc.RssItems.Except(deletedNews).Count()
+             }).Distinct().OrderByDescending(cnc => cnc.Count).Take(20).ToList();
     }
 }

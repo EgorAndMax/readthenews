@@ -93,14 +93,14 @@ namespace ReadTheNews.Helpers
     {
         public bool Equals(RssCategory category1, RssCategory category2)
         {
-            if (category1.Name.ToLower() == category2.Name.ToLower())
+            if (category1.Name.Trim().ToLower() == category2.Name.Trim().ToLower())
                 return true;
             return false;
         }
 
         public int GetHashCode(RssCategory category)
         {
-            return category.Name.ToLower().GetHashCode();
+            return category.Name.Trim().ToLower().GetHashCode();
         }
     }
 }
