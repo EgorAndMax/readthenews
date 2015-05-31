@@ -24,11 +24,7 @@
                 @foreach (CountNewsOfCategory cnoc in list)
                 {
                     <li>
-<<<<<<< HEAD
                         <a href="/RssNews/GetNewsByCategory?name=@cnoc.Name">@cnoc.Name</a>
-=======
-                        <a href="/RssNews/GetNewsByCategory/@cnoc.Name">@cnoc.Name</a>
->>>>>>> 0469e495d9b20a023a326b425b59b1b1c8e801ba
                         <span class="badge badge-primary pull-right">@cnoc.Count</span>
                     </li>
                 }
