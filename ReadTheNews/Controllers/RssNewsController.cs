@@ -81,6 +81,10 @@ namespace ReadTheNews.Controllers
 
             // TODO: реализовать фильтр по подписанным каналам
             ViewBag.CountsCategories = GetCountsCategories();
+            channel.RssItems = channel.RssItems.Except(from d in db.DeletedNews
+                                                       where d.UserId == UserId
+                                                       join ri in db.RssItems on d.RssItemId equals ri.Id
+                                                       select ri).ToList();
 
             return View(channel);
         }
@@ -148,8 +152,8 @@ namespace ReadTheNews.Controllers
                                                 where d.UserId == UserId
                                                 join ri in db.RssItems on d.RssItemId equals ri.Id
                                                 select ri).ToList();
-            var temp = GetCountsCategories();
-            ViewBag.CountsCategories = temp;
+
+            ViewBag.CountsCategories = GetCountsCategories();
 
             return View(news);
         }
