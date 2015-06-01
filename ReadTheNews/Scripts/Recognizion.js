@@ -1,51 +1,44 @@
-<<<<<<< HEAD
-﻿
-=======
-﻿//<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/1.6.0/annyang.min.js"></script>
+﻿if (annyang) {
 
->>>>>>> 234fad4face7083c077a38efa6d1cae117200109
-if (annyang) {
     annyang.setLanguage('ru');
-
-
-<<<<<<< HEAD
-    var commands = {
-        'категория :name': function(name)
-        {
-            alert(name);
-            console.log("start");
-            var href = "http://localhost:9710/RssNews/GetNewsByCategory?name=" + name;
-            console.log(href);
-            location.replace(href);
-            console.log("finish");
-        },
-        'избранное': function () {
-   
-            var href = "http://localhost:9710/RssNews/MyFavoriteNews";
-            alert(href);
-            location.replace(href);
-        },
-        'новости': function () {
-            var href = "http://localhost:9710/RssNews/MyNews";
-            alert(href);        
-            location.replace(href);
-        }
-
-    };
-
-
-    annyang.addCommands(commands);
-    annyang.start();
-
-=======
+    var msg = new SpeechSynthesisUtterance();
+    var voices = window.speechSynthesis.getVoices();
+    msg.voice = voices[10]; 
+    msg.voiceURI = 'native';
+    msg.volume = 1; 
+    msg.rate = 1; 
+    msg.pitch = 2; 
+    msg.lang = 'ru-RU';
+    
 
     var commands = {
-        'привет': say
+        'привет': function () {
+            msg.text = 'привет любитель новостей';
+            speechSynthesis.speak(msg);
+        },
+        'прочитать позже': function () {
+            location.href = "ReadItLater";
+            msg.text = 'вкладка прочитать позже';
+            speechSynthesis.speak(msg);
+        },
+        'избранные новости': function () {
+            location.href = "MyFavoriteNews";
+            msg.text = 'вкладка избранные новости';
+            speechSynthesis.speak(msg);
+        },
+        'мои новости': function () {
+            location.href = "MyNews";
+            msg.text = 'вкладка мои новости';
+            speechSynthesis.speak(msg);
+        },
+        'мои каналы': function () {
+            location.href = "MyChannels";
+            msg.text = 'вкладка мои каналы';
+            speechSynthesis.speak(msg);
+        },
     };
 
-
-
     annyang.addCommands(commands);
+
     annyang.start();
->>>>>>> 234fad4face7083c077a38efa6d1cae117200109
 }
