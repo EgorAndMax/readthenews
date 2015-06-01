@@ -100,6 +100,11 @@
             msg.text = 'вкладка мои каналы';
             speechSynthesis.speak(msg);
         },
+        'каналы': function () {
+            location.replace("http://localhost:9710/RssNews/Channels");
+            msg.text = 'вкладка каналы';
+            speechSynthesis.speak(msg);
+        },
         'отчеты': function () {
             location.replace("http://localhost:9710/Reports/Index");
             msg.text = 'вкладка отчеты';
