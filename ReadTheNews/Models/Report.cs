@@ -161,7 +161,8 @@ namespace ReadTheNews.Models
         public void CreateExcel(string path, RssNewsContext rss_news_context, string user_id)
         {
             Excel.Application xlapp = new Excel.Application();
-            xlapp.Visible = true;
+            xlapp.Visible = false;
+            xlapp.DisplayAlerts = true;
             Excel.Workbook xlappwb = xlapp.Workbooks.Add(Type.Missing);
             Excel.Worksheet xlappwsh = (Excel.Worksheet)xlappwb.Worksheets.get_Item(1);
             xlappwsh.Cells[1, 1] = "Название категории";
@@ -192,8 +193,16 @@ namespace ReadTheNews.Models
             chartPage.SetSourceData(chartRange, misValue);
             path = @"E:\Projects\read_the_news\ReadTheNews\Content\Images\graph.bmp";
             chartPage.Export(path, "BMP", misValue);
+            
+            xlappwb.Saved = true;
             xlappwb.Save();
-            xlappwb.Close(true, Type.Missing, false);
+            xlappwb.SaveCopyAs(@"E:\Projects\read_the_news\ReadTheNews\Content\Reports\Report.xls");
+            //           xlappwb.SaveAs(path + "Reports.xls", Excel.XlFileFormat.xlExcel9795, "WWWWW", "WWWWW", Type.Missing, Type.Missing,
+            // Excel.XlSaveAsAccessMode.xlNoChange, Type.Missing,
+            //Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+
+            //         xlappwb.Close(true, Type.Missing, false);
+            xlappwb.Close();
             xlapp.Quit();
         }
 
