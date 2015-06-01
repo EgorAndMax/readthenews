@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Отчет";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br/>
+<br/>
+<form name="pdf" action="CreateDocument">
+    <h3>Новости за определенный период времени (pdf): </h3>
+    <p>
+        <input type="date" name="start_date" required />
+        <input type="date" name="finish_date" required/>
+        <input type="hidden" name="type_doc" value="pdf">
+    </p> 
+    <p>
+        <input type="submit" value="Скачать" />
+    </p>
+</form>
+<br/>
+<form name="xls" action="CreateDocument">
+    <h3>Cтатистика по категориям новостей: </h3>
+    <p>
+        <input type="radio" name="type_doc" value="xls"/>
+        XLS(графический формат)
+    </p>
+    <p>
+        <input type="radio" name="type_doc" value="ods" />
+        ODS(текстовый формат)
+    </p>
+    <p>
+        <input type="submit" value="Скачать" />
+    </p>
+</form>
+
+    
+
+
