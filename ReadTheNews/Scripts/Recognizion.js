@@ -17,25 +17,35 @@
             speechSynthesis.speak(msg);
         },
         'прочитать позже': function () {
-            location.href = "ReadItLater";
+            location.replace("http://localhost:9710/RssNews/ReadItLater");
             msg.text = 'вкладка прочитать позже';
             speechSynthesis.speak(msg);
         },
         'избранные новости': function () {
-            location.href = "MyFavoriteNews";
+            location.replace("http://localhost:9710/RssNews/MyFavoriteNews");
             msg.text = 'вкладка избранные новости';
             speechSynthesis.speak(msg);
         },
         'мои новости': function () {
-            location.href = "MyNews";
+            location.replace("http://localhost:9710/RssNews/MyNews");
             msg.text = 'вкладка мои новости';
             speechSynthesis.speak(msg);
         },
         'мои каналы': function () {
-            location.href = "MyChannels";
+            location.replace("http://localhost:9710/RssNews/MyChannels");
             msg.text = 'вкладка мои каналы';
             speechSynthesis.speak(msg);
         },
+        'отчеты': function () {
+            location.replace("http://localhost:9710/Reports/Index");
+            msg.text = 'вкладка отчеты';
+            speechSynthesis.speak(msg);
+        },
+        'категория :name': function (name) {
+            location.replace("http://localhost:9710/Reports/GetNewsByCategory?Name=" + name);
+            msg.text = 'вкладка' + ':name';
+            speechSynthesis.speak(msg);
+        }
     };
 
     annyang.addCommands(commands);
