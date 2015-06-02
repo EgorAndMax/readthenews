@@ -26,9 +26,15 @@ namespace ReadTheNews.Controllers
                 return new EmptyResult();
 
             int channelId = Int32.Parse(id.ToString());
-            db.SubscribedChannels.Add(new UserSubscribedChannels { RssChannelId = channelId, UserId = UserId });
-            db.SaveChanges();
+            try
+            {
+                db.SubscribedChannels.Add(new UserSubscribedChannels { RssChannelId = channelId, UserId = UserId });
+                db.SaveChanges();
+            }
+            catch(Exception ex)
+            {
 
+            }
             return new EmptyResult();
         }
 
@@ -38,15 +44,22 @@ namespace ReadTheNews.Controllers
                 return new EmptyResult();
 
             int rssItemId = Int32.Parse(id.ToString());
-            db.FavoriteNews.Add(
+            try
+            {
+                db.FavoriteNews.Add(
                 new FavoriteNews
                 {
                     RssItemId = rssItemId,
                     UserId = UserId
                 });
-            db.SaveChanges();
+           
+                db.SaveChanges();
+            }
+            catch(Exception ex)
+            {
 
-            return new EmptyResult();
+            }
+             return new EmptyResult();
         }
 
         public EmptyResult DeleteNewsFromUserNewsList(int? id)
@@ -55,14 +68,21 @@ namespace ReadTheNews.Controllers
                 return new EmptyResult();
 
             int rssItemId = Int32.Parse(id.ToString());
-            db.DeletedNews.Add(
+            try
+            {
+                db.DeletedNews.Add(
                 new DeletedRssItemsByUser
                 {
                     RssItemId = rssItemId,
                     UserId = UserId
                 });
-            db.SaveChanges();
+            
+                db.SaveChanges();
+            }
+            catch(Exception ex)
+            {
 
+            }
             return new EmptyResult();
         }
 
@@ -72,13 +92,21 @@ namespace ReadTheNews.Controllers
                 return new EmptyResult();
 
             int rssItemId = Int32.Parse(id.ToString());
-            db.DefferedNews.Add(
+            try
+            {
+                db.DefferedNews.Add(
                 new UserDefferedNews
                 {
                     RssItemId = rssItemId,
                     UserId = UserId
                 });
-            db.SaveChanges();
+            
+                db.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+
+            }
 
             return new EmptyResult();
         }
